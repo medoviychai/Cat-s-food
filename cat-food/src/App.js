@@ -1,43 +1,42 @@
 import "./App.scss";
-import {useState} from 'react';
+import { useState } from "react";
 
 function App() {
-
   const [arrOfCards, setArrOfCards] = useState([
     {
-      itemClassName: 'catalog-item',
-      weightClassName: 'weight',
+      itemClassName: "catalog-item",
+      weightClassName: "weight",
       filling: "с фуа-гра",
       portions: "10 порций",
       gift: "мышь в подарок",
       weight: "0,5",
       add: null,
-      description: 'Печень утки разварная с артишоками.',
-      outOfStuckDescription: 'Печалька, с фуа-гра закончился.',
+      description: "Печень утки разварная с артишоками.",
+      outOfStuckDescription: "Печалька, с фуа-гра закончился.",
       inStock: true,
     },
     {
-      itemClassName: 'selected-item',
-      weightClassName: 'selected-weight',
+      itemClassName: "selected-item",
+      weightClassName: "selected-weight",
       filling: "с рыбой",
       portions: "40 порций",
       gift: "2 мыши в подарок",
       weight: "2",
       add: null,
-      description: 'Головы щучьи с чесноком да свежайшая сёмгушка.',
-      outOfStuckDescription: 'Печалька, с рыбой закончился.',
+      description: "Головы щучьи с чесноком да свежайшая сёмгушка.",
+      outOfStuckDescription: "Печалька, с рыбой закончился.",
       inStock: true,
     },
     {
-      itemClassName: 'out-of-stock-item',
-      weightClassName: 'out-of-stock-weight',
+      itemClassName: "out-of-stock-item",
+      weightClassName: "out-of-stock-weight",
       filling: "с курой",
       portions: "100 порций",
       gift: "5 мышей в подарок",
       weight: "5",
-      add: 'заказчик доволен',
-      description: 'Филе из цыплят с трюфелями в бульоне.',
-      outOfStuckDescription: 'Печалька, с курой закончился.',
+      add: "заказчик доволен",
+      description: "Филе из цыплят с трюфелями в бульоне.",
+      outOfStuckDescription: "Печалька, с курой закончился.",
       inStock: false,
     },
   ]);
@@ -46,19 +45,21 @@ function App() {
     let newArr = [];
     arrOfCards.map((item, index) => {
       if (i === index) {
-        if (item.itemClassName === 'out-of-stock-item') {
-          return newArr = arrOfCards;
+        if (item.itemClassName === "out-of-stock-item") {
+          return (newArr = arrOfCards);
         } else {
-          item.itemClassName === 'catalog-item' ? item.itemClassName = 'selected-item' : item.itemClassName = 'catalog-item';
-          item.weightClassName === 'weight' ? item.weightClassName = 'selected-weight' : item.weightClassName = 'weight';
-          
+          item.itemClassName === "catalog-item"
+            ? (item.itemClassName = "selected-item")
+            : (item.itemClassName = "catalog-item");
+          item.weightClassName === "weight"
+            ? (item.weightClassName = "selected-weight")
+            : (item.weightClassName = "weight");
         }
-        }
-        newArr.push(item);
-        
-    })
-    setArrOfCards(newArr)
-  }
+      }
+      newArr.push(item);
+    });
+    setArrOfCards(newArr);
+  };
 
   return (
     <div className="App">
@@ -112,27 +113,15 @@ function App() {
                   </p>
                 )
               ) : item.itemClassName === "out-of-stock-item" ? (
-                <p className="buy-food" style={{color: 'rgba(255, 255, 102, 1)'}}>{item.outOfStuckDescription}</p>
+                <p
+                  className="buy-food"
+                  style={{ color: "rgba(255, 255, 102, 1)" }}
+                >
+                  {item.outOfStuckDescription}
+                </p>
               ) : (
                 <p></p>
               )}
-              {/* {item.itemClassName === "selected-item" ? (
-                <p className="buy-food">{item.description}</p>
-              ) : (
-                <p className="buy-food">
-                  Чего сидишь? Порадуй котэ,{" "}
-                  <span
-                    className="highlights-to-buy"
-                    onClick={() => {
-                      selectedCard(index);
-                    }}
-                  >
-                    купи
-                  </span>
-                  .
-                </p>
-              )}
-              {item.itemClassName === 'out-of-stock-item' ? <p className="buy-food">{item.outOfStuckDescription}</p> : <p></p>} */}
             </div>
           ))}
         </div>

@@ -3,10 +3,52 @@
     src: url(./fonts/Exo2.0-Thin.otf);
 }
 
-$additional-font-color: #666666;
 $default-font-color: #1698D9;
 $selected-font-color: #D91667;
 $out-of-stuck-color: #B3B3B3;
+$additional-font-color: #666666;
+
+%card-item {
+    box-sizing: border-box;
+    border-radius: 12px;
+    background-color: #F2F2F2;
+    position: relative;
+    clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%, 0 9%);
+    padding: 13px 64px 0 47px;
+    width: 320px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+%cut-corner {
+    position: relative;
+    content: '';
+    width: 65px;
+    display: block;
+    height: 4px;
+    top: 6px;
+    left: -62px;
+    transform: rotate(-45deg);
+}
+
+%weight-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 42px;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    bottom: 15px;
+    left: 220px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    padding: 5px 10px;
+    line-height: 40px;
+    color: white;
+    margin: 0;
+}
 
 body {
     background-image: url('../public/images/Pattern.png');
@@ -41,29 +83,12 @@ p {
 }
 
 .catalog-item {
-    box-sizing: border-box;
-    border-radius: 12px;
+    @extend %card-item;
     border: 4px solid $default-font-color;
-    background-color: #F2F2F2;
-    position: relative;
-    clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%, 0 9%);
-    padding: 13px 64px 0 47px;
-
-    width: 320px;
-
-    margin-bottom: 10px;
-    cursor: pointer;
 
     &::before {
-        position: relative;
-        content: '';
-        width: 65px;
+        @extend %cut-corner;
         background-color: $default-font-color;
-        display: block;
-        height: 4px;
-        top: 6px;
-        left: -62px;
-        transform: rotate(-45deg);
     }
 
     .additional-description::before {
@@ -72,27 +97,12 @@ p {
 }
 
 .selected-item {
-    box-sizing: border-box;
-    border-radius: 12px;
+    @extend %card-item;
     border: 4px solid $selected-font-color;
-    background-color: #F2F2F2;
-    position: relative;
-    clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%, 0 9%);
-    padding: 13px 64px 0 47px;
-    width: 320px;
-    margin-bottom: 10px;
-    cursor: pointer;
 
     &::before {
-        position: relative;
-        content: '';
-        width: 65px;
+        @extend %cut-corner;
         background-color: $selected-font-color;
-        display: block;
-        height: 4px;
-        top: 6px;
-        left: -62px;
-        transform: rotate(-45deg);
     }
 
     .additional-description::before {
@@ -106,27 +116,12 @@ p {
 }
 
 .out-of-stock-item {
-    box-sizing: border-box;
-    border-radius: 12px;
+    @extend %card-item;
     border: 4px solid $out-of-stuck-color;
-    background-color: #F2F2F2;
-    position: relative;
-    clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%, 0 9%);
-    padding: 13px 64px 0 47px;
-    width: 320px;
-    margin-bottom: 10px;
-    cursor: pointer;
 
     &::before {
-        position: relative;
-        content: '';
-        width: 65px;
+        @extend %cut-corner;
         background-color: $out-of-stuck-color;
-        display: block;
-        height: 4px;
-        top: 6px;
-        left: -62px;
-        transform: rotate(-45deg);
     }
 
     p,
@@ -178,66 +173,21 @@ p {
 
 // WEIGHT
 .weight {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-size: 42px;
-    width: 80px;
-    height: 80px;
-    position: absolute;
-    bottom: 15px;
-    left: 220px;
+    @extend %weight-circle;
     border: 1px solid $default-font-color;
-    box-sizing: border-box;
-    border-radius: 50%;
-    padding: 5px 10px;
-    line-height: 40px;
     background-color: $default-font-color;
-    color: white;
-    margin: 0;
 }
 
 .selected-weight {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-size: 42px;
-    width: 80px;
-    height: 80px;
-    position: absolute;
-    bottom: 15px;
-    left: 220px;
+    @extend %weight-circle;
     border: 1px solid $selected-font-color;
-    box-sizing: border-box;
-    border-radius: 50%;
-    padding: 5px 10px;
-    line-height: 40px;
     background-color: $selected-font-color;
-    color: white;
-    margin: 0;
 }
 
 .out-of-stock-weight {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-size: 42px;
-    width: 80px;
-    height: 80px;
-    position: absolute;
-    bottom: 15px;
-    left: 220px;
+    @extend %weight-circle;
     border: 1px solid $out-of-stuck-color;
-    box-sizing: border-box;
-    border-radius: 50%;
-    padding: 5px 10px;
-    line-height: 40px;
     background-color: $out-of-stuck-color;
-    color: white;
-    margin: 0;
 }
 
 .weight-count {
