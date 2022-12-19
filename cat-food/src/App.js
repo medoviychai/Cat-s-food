@@ -3,7 +3,7 @@ import {useState} from 'react';
 
 function App() {
 
-  const [arrOfCarts, setArrOfCarts] = useState([
+  const [arrOfCards, setArrOfCards] = useState([
     {
       itemClassName: 'catalog-item',
       weightClassName: 'weight',
@@ -42,14 +42,12 @@ function App() {
     },
   ]);
 
-  const [flag, setFlag] = useState(true);
-
   const selectedCard = (i) => {
     let newArr = [];
-    arrOfCarts.map((item, index) => {
+    arrOfCards.map((item, index) => {
       if (i === index) {
         if (item.itemClassName === 'out-of-stock-item') {
-          return newArr = arrOfCarts;
+          return newArr = arrOfCards;
         } else {
           item.itemClassName === 'catalog-item' ? item.itemClassName = 'selected-item' : item.itemClassName = 'catalog-item';
           item.weightClassName === 'weight' ? item.weightClassName = 'selected-weight' : item.weightClassName = 'weight';
@@ -59,7 +57,7 @@ function App() {
         newArr.push(item);
         
     })
-    setArrOfCarts(newArr)
+    setArrOfCards(newArr)
   }
 
   return (
@@ -67,7 +65,7 @@ function App() {
       <div className="box">
         <h1 className="title">Ты сегодня покормил кота?</h1>
         <div className="catalog">
-          {arrOfCarts.map((item, index) => (
+          {arrOfCards.map((item, index) => (
             <div className="catalog-item-conteiner">
               <div
                 className={item.itemClassName}
