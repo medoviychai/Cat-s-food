@@ -3,16 +3,63 @@ import {useState} from 'react';
 
 function App() {
 
-  const [flag, setFlag] = useState(false);
+  const [arrOfCarts, setArrOfCarts] = useState([
+    {
+      itemClassName: 'catalog-item',
+      weightClassName: 'weight',
+      filling: "с фуа-гра",
+      portions: "10 порций",
+      gift: "мышь в подарок",
+      weight: "0,5",
+      add: null,
+      description: 'Печень утки разварная с артишоками.',
+      outOfStuckDescription: 'Печалька, с фуа-гра закончился.',
+      inStock: true,
+    },
+    {
+      itemClassName: 'selected-item',
+      weightClassName: 'selected-weight',
+      filling: "с рыбой",
+      portions: "40 порций",
+      gift: "2 мыши в подарок",
+      weight: "2",
+      add: null,
+      description: 'Головы щучьи с чесноком да свежайшая сёмгушка.',
+      outOfStuckDescription: 'Печалька, с рыбой закончился.',
+      inStock: true,
+    },
+    {
+      itemClassName: 'out-of-stock-item',
+      weightClassName: 'out-of-stock-weight',
+      filling: "с курой",
+      portions: "100 порций",
+      gift: "5 мышей в подарок",
+      weight: "5",
+      add: 'заказчик доволен',
+      description: 'Филе из цыплят с трюфелями в бульоне.',
+      outOfStuckDescription: 'Печалька, с курой закончился.',
+      inStock: false,
+    },
+  ]);
 
+  const [flag, setFlag] = useState(true);
 
-  const selectedCard = (e) => {
-    e.target.classList.toggle('selected-item');
-    e.target.classList.toggle('catalog-item');
-    const weight = document.querySelector('.weight');
-    weight.classList.toggle('selected-weight');
-
-    setFlag(true);
+  const selectedCard = (i) => {
+    let newArr = [];
+    arrOfCarts.map((item, index) => {
+      if (i === index) {
+        if (item.itemClassName === 'out-of-stock-item') {
+          return newArr = arrOfCarts;
+        } else {
+          item.itemClassName === 'catalog-item' ? item.itemClassName = 'selected-item' : item.itemClassName = 'catalog-item';
+          item.weightClassName === 'weight' ? item.weightClassName = 'selected-weight' : item.weightClassName = 'weight';
+          
+        }
+        }
+        newArr.push(item);
+        
+    })
+    setArrOfCarts(newArr)
   }
 
   return (
@@ -20,73 +67,76 @@ function App() {
       <div className="box">
         <h1 className="title">Ты сегодня покормил кота?</h1>
         <div className="catalog">
-          <div className="catalog-item-conteiner">
-            <div className="catalog-item" onClick={selectedCard}>
-              <p className="additional-description">
-                Сказочное заморское яство
-              </p>
-              <h3 className="food-title">
-                <span className="highlight-food-title">Нямушка</span> с фуа-гра
-              </h3>
-              <p className="main-description">
-                <p>10 порций</p>
-                <p>мышь в подарок</p>
-              </p>
-              <img className="cat-image" src="images/Photo.png" alt="cat"></img>
-              <div className="weight">
-                <span className="weight-count">0,5</span>{" "}
-                <span className="weight-measurement">кг</span>
+          {arrOfCarts.map((item, index) => (
+            <div className="catalog-item-conteiner">
+              <div
+                className={item.itemClassName}
+                onClick={() => {
+                  selectedCard(index);
+                }}
+              >
+                <p className="additional-description"></p>
+                <h3 className="food-title">
+                  <span className="highlight-food-title">Нямушка</span>{" "}
+                  {item.filling}
+                </h3>
+                <p className="main-description">
+                  <p>{item.portions}</p>
+                  <p>{item.gift}</p>
+                  {item.add === null ? <span></span> : <p>{item.add}</p>}
+                </p>
+                <img
+                  className="cat-image"
+                  src="images/Photo.png"
+                  alt="cat"
+                ></img>
+                <div className={item.weightClassName}>
+                  <span className="weight-count">{item.weight}</span>
+                  <span className="weight-measurement">кг</span>
+                </div>
               </div>
+              {item.itemClassName === "selected-item" ||
+              item.itemClassName === "catalog-item" ? (
+                item.itemClassName === "selected-item" ? (
+                  <p className="buy-food">{item.description}</p>
+                ) : (
+                  <p className="buy-food">
+                    Чего сидишь? Порадуй котэ,{" "}
+                    <span
+                      className="highlights-to-buy"
+                      onClick={() => {
+                        selectedCard(index);
+                      }}
+                    >
+                      купи
+                    </span>
+                    .
+                  </p>
+                )
+              ) : item.itemClassName === "out-of-stock-item" ? (
+                <p className="buy-food" style={{color: 'rgba(255, 255, 102, 1)'}}>{item.outOfStuckDescription}</p>
+              ) : (
+                <p></p>
+              )}
+              {/* {item.itemClassName === "selected-item" ? (
+                <p className="buy-food">{item.description}</p>
+              ) : (
+                <p className="buy-food">
+                  Чего сидишь? Порадуй котэ,{" "}
+                  <span
+                    className="highlights-to-buy"
+                    onClick={() => {
+                      selectedCard(index);
+                    }}
+                  >
+                    купи
+                  </span>
+                  .
+                </p>
+              )}
+              {item.itemClassName === 'out-of-stock-item' ? <p className="buy-food">{item.outOfStuckDescription}</p> : <p></p>} */}
             </div>
-            <p className="buy-food">
-              Чего сидишь? Порадуй котэ, <span className='highlights-to-buy'>купи</span>.
-            </p>
-          </div>
-          <div className="catalog-item-conteiner">
-            <div className="catalog-item">
-              <p className="additional-description">
-                Сказочное заморское яство
-              </p>
-              <h3 className="food-title">
-                <span className="highlight-food-title">Нямушка</span> с рыбой
-              </h3>
-              <p className="main-description">
-                <p>40 порций</p>
-                <p>2 мыши в подарок</p>
-              </p>
-              <img className="cat-image" src="images/Photo.png" alt="cat"></img>
-              <div className="weight">
-                <span className="weight-count">2</span>{" "}
-                <span className="weight-measurement">кг</span>
-              </div>
-            </div>
-            <p className="buy-food">
-            Чего сидишь? Порадуй котэ, <span className='highlights-to-buy'>купи</span>.
-            </p>
-          </div>
-          <div className="catalog-item-conteiner">
-            <div className="catalog-item">
-              <p className="additional-description">
-                Сказочное заморское яство
-              </p>
-              <h3 className="food-title">
-                <span className="highlight-food-title">Нямушка</span> с курой
-              </h3>
-              <p className="main-description">
-                <p>100 порций</p>
-                <p>5 мышей в подарок</p>
-                <p>заказчик доволен</p>
-              </p>
-              <img className="cat-image" src="images/Photo.png" alt="cat"></img>
-              <div className="weight">
-                <span className="weight-count">5</span>{" "}
-                <span className="weight-measurement">кг</span>
-              </div>
-            </div>
-            <p className="buy-food">
-              Чего сидишь? Порадуй котэ, <span className='highlights-to-buy'>купи</span>.
-            </p>
-          </div>
+          ))}
         </div>
       </div>
     </div>
