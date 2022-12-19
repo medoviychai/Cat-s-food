@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/test-funbox/static/css/main.972b4ff6.css",
+    "main.js": "/test-funbox/static/js/main.34174527.js",
+    "static/media/Pattern.png": "/test-funbox/static/media/Pattern.8b93e2127ee44e2a8146.png",
+    "static/media/Exo2.0-Thin.otf": "/test-funbox/static/media/Exo2.0-Thin.51c257bfa8ec3e0cfb4b.otf",
+    "index.html": "/test-funbox/index.html",
+    "main.972b4ff6.css.map": "/test-funbox/static/css/main.972b4ff6.css.map",
+    "main.34174527.js.map": "/test-funbox/static/js/main.34174527.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.972b4ff6.css",
+    "static/js/main.34174527.js"
+  ]
+}
